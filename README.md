@@ -1,2 +1,2 @@
-# My-DevOps-Lab
+# My-DevSecOps-Lab
 
