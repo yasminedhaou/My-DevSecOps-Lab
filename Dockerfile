@@ -1,17 +1,13 @@
 FROM node:18-alpine
 
-
 RUN addgroup -g 1001 -S nodegroup && \
     adduser -S nodeuser -u 1001 -G nodegroup
 
-
 WORKDIR /app
-
 
 COPY package*.json ./
 
 RUN npm ci --only=production && \
-    npm audit fix && \
     npm cache clean --force
 
 COPY . .
