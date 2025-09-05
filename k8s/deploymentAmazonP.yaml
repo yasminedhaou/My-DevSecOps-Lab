@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: myapp
-          image: registry.gitlab.com/yasminedhaou02/devsecops-amazone:version-16
+          image: registry.gitlab.com/yasminedhaou02/devsecops-amazone:version-1
           ports:
             - containerPort: 3000
 
