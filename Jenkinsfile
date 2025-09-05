@@ -1,10 +1,6 @@
 node {   
-
-   
     def registryProjet = 'registry.gitlab.com/yasminedhaou02/devsecops-amazone'
     def IMAGE = "${registryProjet}:version-${env.BUILD_ID}"
-
-    
     def SONARQUBE_SERVER = 'sq1'
 
     stage('Clone Code') {
@@ -14,9 +10,17 @@ node {
     stage('SonarQube Analysis') {
         def scannerHome = tool 'sonarscan' 
         withSonarQubeEnv(SONARQUBE_SERVER) {
-            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=MyProject -Dsonar.sources=."
+            sh """
+                ${scannerHome}/bin/sonar-scanner \
+                -Dsonar.projectKey=MyProject \
+                -Dsonar.sources=. \
+                -Dsonar.host.url=\$SONAR_HOST_URL \
+                -Dsonar.login=\$SONAR_AUTH_TOKEN
+            """
         }
     }
+
+
 
     stage('Build Docker Image') {
         def img = docker.build("$IMAGE", '.')
@@ -41,16 +45,12 @@ node {
             git config --global user.email "jenkins@example.com"
             git config --global user.name "jenkins"
 
-            # Cloner le repo GitOps surveillé par ArgoCD
-            
-            cd My-DevSecOps-Lab/k8s
-
             # Modifier l'image dans deployment.yaml
-            sed -i 's#${registryProjet}:.*#${IMAGE}#' deploymentAmazonP.yaml
+            sed -i 's#${registryProjet}:.*#${IMAGE}#' k8s/deploymentAmazonP.yaml
 
-            git add deploymentAmazonP.yaml
+            git add k8s/deploymentAmazonP.yaml
             git commit -m "Update image to ${IMAGE}"
-            git push origin main
+            git push https://\$GIT_USER:\$GIT_PASS@github.com/yasminedhaou/My-DevSecOps-Lab.git main
             """
         }
     }
