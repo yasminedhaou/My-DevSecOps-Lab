@@ -24,22 +24,22 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: amazonep-service   # <-- tout en minuscules
+  name: amazonep-service   
   labels:
     app: amazonep
 spec:
   type: ClusterIP
   selector:
-    app: myapp              # doit correspondre aux labels du Deployment
+    app: myapp              
   ports:
   - port: 80
-    targetPort: 3000        # correspond au containerPort
+    targetPort: 3000        
 
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: amazonep-ingress   # <-- tout en minuscules
+  name: amazonep-ingress   
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
@@ -51,6 +51,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: amazonep-service  # <-- correspond au Service en minuscules
+            name: amazonep-service  
             port:
               number: 80

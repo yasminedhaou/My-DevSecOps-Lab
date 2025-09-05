@@ -1,10 +1,10 @@
-node {   // Forcer l'exécution sur le Master
+node {   
 
-    // Définir le registry GitLab et le tag de l'image
+   
     def registryProjet = 'registry.gitlab.com/yasminedhaou02/devsecops-amazone'
     def IMAGE = "${registryProjet}:version-${env.BUILD_ID}"
 
-    // Nom du serveur SonarQube configuré dans Jenkins
+    
     def SONARQUBE_SERVER = 'sq1'
 
     stage('Clone Code') {
@@ -12,7 +12,7 @@ node {   // Forcer l'exécution sur le Master
     }
 
     stage('SonarQube Analysis') {
-        def scannerHome = tool 'sonarscan'  // Nom défini dans Global Tool Configuration
+        def scannerHome = tool 'sonarscan' 
         withSonarQubeEnv(SONARQUBE_SERVER) {
             sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=MyProject -Dsonar.sources=."
         }
