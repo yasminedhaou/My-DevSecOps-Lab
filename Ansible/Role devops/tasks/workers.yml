@@ -1,0 +1,13 @@
+- name: Join Worker Node to the Cluster
+  command: "{{ hostvars['masterk8s']['kubeadm_join_command'] }}"
+  become: true
+  when: hostvars['masterk8s']['kubeadm_join_command'] is defined
+
+
+
+- name: Restart kubelet on Worker
+  service:
+    name: kubelet
+    state: restarted
+  become: true
+

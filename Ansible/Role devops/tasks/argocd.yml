@@ -1,0 +1,23 @@
+---
+# Rôle Ansible pour installer et configurer ArgoCD sur Kubernetes
+
+- name: Créer namespace argocd
+  command: kubectl create namespace argocd
+  ignore_errors: yes
+
+- name: Installer ArgoCD
+  command: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+- name: Obtenir le mot de passe initial d'ArgoCD
+  shell: "kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d"
+  register: argocd_initial_password
+
+- name: Afficher mot de passe initial d'ArgoCD
+  debug:
+    msg: "Mot de passe initial ArgoCD: {{ argocd_initial_password.stdout }}"
+
+- name: Patcher le service argocd-server pour type NodePort
+  shell: |
+    kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
+  ignore_errors: yes
+

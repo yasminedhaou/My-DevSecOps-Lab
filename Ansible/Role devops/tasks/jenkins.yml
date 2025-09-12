@@ -1,0 +1,79 @@
+---
+# Tâches pour installer Docker et Jenkins sur une VM RedHat (sans hosts)
+
+# -------- Installation Docker --------
+- name: Installer les dépendances pour Docker sur Ubuntu
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
+    update_cache: yes
+
+
+- name: Ajouter le dépôt Docker
+  command: dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+  args:
+    creates: /etc/yum.repos.d/docker-ce.repo
+
+- name: Installer Docker
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+
+- name: Activer et démarrer Docker
+  systemd:
+    name: docker
+    enabled: yes
+    state: started
+
+# -------- Installation Jenkins --------
+- name: Installer les dépendances Jenkins
+  apt:
+    name:
+      - java-11-openjdk
+      - wget
+      - git
+    state: present
+
+- name: Ajouter le dépôt Jenkins
+  get_url:
+    url: "https://pkg.jenkins.io/redhat-stable/jenkins.repo"
+    dest: /etc/yum.repos.d/jenkins.repo
+
+- name: Ajouter la clé GPG Jenkins
+  rpm_key:
+    state: present
+    key: "https://pkg.jenkins.io/redhat-stable/jenkins.io.key"
+
+- name: Installer Jenkins
+  apt:
+    name: jenkins
+    state: present
+
+- name: Activer et démarrer Jenkins
+  systemd:
+    name: jenkins
+    enabled: yes
+    state: started
+
+- name: Ouvrir le port 8080 dans le firewall
+  shell: |
+    firewall-cmd --permanent --add-port=8080/tcp
+    firewall-cmd --reload
+
+- name: Obtenir le mot de passe initial Jenkins
+  shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+  register: jenkins_initial_password
+  ignore_errors: yes
+
+- name: Afficher le mot de passe initial Jenkins
+  debug:
+    msg: "Mot de passe initial Jenkins: {{ jenkins_initial_password.stdout }}"
+

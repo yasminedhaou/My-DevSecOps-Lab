@@ -1,0 +1,58 @@
+# roles/devops/tasks/main.yml
+
+# ------------------------------
+# Kubernetes commun (master + workers uniquement)
+# ------------------------------
+- name: "Installation de Kubernetes"
+  import_tasks: commun.yml
+  when: "'kubernetes' in group_names"
+
+# ------------------------------
+# Configurer le Master Kubernetes
+# ------------------------------
+- name: Configurer le Master Kubernetes
+  import_tasks: master.yml
+  when: "'master' in group_names"
+
+# ------------------------------
+# Configurer les Workers Kubernetes
+# ------------------------------
+- name: Configurer les Workers Kubernetes
+  import_tasks: workers.yml
+  when: "'workers' in group_names"
+
+# ------------------------------
+# Installer Node Exporter sur les VMs Azure
+# ------------------------------
+- name: Installer Node Exporter sur les VMs Azure
+  import_tasks: azuremono.yml
+  when: "'azure_vms' in group_names"
+
+# ------------------------------
+# Installer monitoring complet du cluster Kubernetes
+# ------------------------------
+- name: Installer monitoring Kubernetes
+  import_tasks: monitoring.yml
+  when: "'master' in group_names"
+
+# ------------------------------
+# Installer ArgoCD sur le cluster Kubernetes
+# ------------------------------
+- name: Installer ArgoCD
+  import_tasks: argocd.yml
+  when: "'master' in group_names"
+
+# ------------------------------
+# Installer Docker et Jenkins master
+# ------------------------------
+- name: Installer Jenkins master
+  import_tasks: jenkins.yml
+  when: "'jenkins_master' in group_names"
+
+# ------------------------------
+# Installer Jenkins slave
+# ------------------------------
+- name: Installer Jenkins slave
+  import_tasks: jenkins_slave.yml
+  when: "'jenkins_slave' in group_names"
+

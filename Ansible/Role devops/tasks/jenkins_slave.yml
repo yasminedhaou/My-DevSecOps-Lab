@@ -1,0 +1,51 @@
+# Jenkins Slave / Agent preparation pour Ubuntu 22.04
+
+# -------- Installer Java 11 --------
+- name: Installer Java 11
+  apt:
+    name: openjdk-11-jdk
+    state: present
+    update_cache: yes
+
+# -------- Installer les dépendances Docker --------
+- name: Installer les dépendances nécessaires
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
+    update_cache: yes
+
+# -------- Ajouter la clé GPG officielle Docker --------
+- name: Ajouter la clé GPG Docker
+  command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  args:
+    creates: /usr/share/keyrings/docker-archive-keyring.gpg
+
+# -------- Ajouter le dépôt Docker --------
+- name: Ajouter le dépôt Docker
+  apt_repository:
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+    filename: docker
+
+# -------- Installer Docker --------
+- name: Installer Docker
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+    update_cache: yes
+
+# -------- Activer et démarrer Docker --------
+- name: Activer et démarrer Docker
+  systemd:
+    name: docker
+    enabled: yes
+    state: started
+

@@ -1,0 +1,107 @@
+- name: Installer dépendances nécessaires (curl, tar)
+  package:
+    name:
+      - curl
+      - tar
+    state: present
+
+- name: Télécharger Helm
+  get_url:
+    url: "https://get.helm.sh/helm-v3.12.2-linux-amd64.tar.gz"
+    dest: /tmp/helm.tar.gz
+    mode: '0644'
+  register: helm_download
+  until: helm_download is succeeded
+  retries: 3
+  delay: 5
+
+- name: Décompresser Helm
+  unarchive:
+    src: /tmp/helm.tar.gz
+    dest: /tmp/helm
+    remote_src: yes
+    extra_opts: [--strip-components=1]
+
+- name: Déplacer Helm dans /usr/local/bin
+  copy:
+    src: /tmp/helm/helm
+    dest: /usr/local/bin/helm
+    remote_src: yes
+    mode: '0755'
+
+- name: Vérifier Helm installé
+  command: helm version
+  register: helm_check
+  changed_when: false
+
+- name: Ajouter repo Prometheus Community
+  command: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+  args:
+    creates: /root/.cache/helm/repository/prometheus-community-index.yaml
+
+- name: Mettre à jour les repos Helm
+  command: helm repo update
+
+- name: Créer namespace monitoring
+  kubernetes.core.k8s:
+    api_version: v1
+    kind: Namespace
+    name: monitoring
+    state: present
+
+# --- Nettoyer Flannel avant Helm ---
+- name: Supprimer le bridge cni0
+  command: ip link delete cni0
+  ignore_errors: yes
+
+- name: Supprimer le bridge flannel.1
+  command: ip link delete flannel.1
+  ignore_errors: yes
+
+- name: Redémarrer kubelet
+  systemd:
+    name: kubelet
+    state: restarted
+    enabled: yes
+
+- name: Créer fichier values.yaml pour Prometheus + Grafana + scrape Jenkins VMs
+  copy:
+    dest: /tmp/prometheus-values.yaml
+    content: |
+      grafana:
+        adminPassword: "admin123"
+        service:
+          type: NodePort
+          nodePort: 32000
+
+      prometheus:
+        prometheusSpec:
+          additionalScrapeConfigs:
+            - job_name: 'jenkins_vms_tailscale'
+              static_configs:
+                - targets:
+                    - "100.103.249.120:9100"
+                    - "100.126.58.113:9100"
+
+- name: Installer kube-prometheus-stack
+  command: >
+    helm install prometheus prometheus-community/kube-prometheus-stack
+    --namespace monitoring
+    -f /tmp/prometheus-values.yaml
+  args:
+    creates: /tmp/prometheus-install.done
+
+- name: Créer fichier marqueur pour Helm install
+  file:
+    path: /tmp/prometheus-install.done
+    state: touch
+
+- name: Obtenir mot de passe Grafana
+  shell: kubectl get secret -n monitoring prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode
+  register: grafana_pass
+  failed_when: false
+
+- name: Afficher mot de passe Grafana
+  debug:
+    msg: "Password Grafana: {{ grafana_pass.stdout | default('admin123') }}"
+
