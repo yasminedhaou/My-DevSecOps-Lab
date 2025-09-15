@@ -27,7 +27,8 @@ A full-stack **DevSecOps implementation** showcasing how to build, secure, deplo
 ## 📊 Project Architecture Diagram
 
 
-![Master Node](https://github.com/user-attachments/assets/e30a660a-eb03-46e4-934d-91bdc50a14a0)
+![Master Node (1)](https://github.com/user-attachments/assets/ef455c4d-b8e1-4f8a-9d74-b43e1b1247f5)
+
 
 ---
 
