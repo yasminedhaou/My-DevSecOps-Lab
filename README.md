@@ -20,7 +20,7 @@ A full-stack **DevSecOps implementation** showcasing how to build, secure, deplo
 - Monitoring with **Prometheus + Grafana + Node Exporter**  
 - CI/CD pipelines with **Jenkins** (GitHub, SonarQube, Docker, Trivy, GitLab Registry)  
 - Application deployment via **NGINX Ingress + MetalLB**  
-- Final domain: 🌐 **www.primevideo-yasmine.com**
+- Final domain: 🌐 **www.amazoneprime.com**
 
 ---
 
@@ -65,8 +65,7 @@ Created 4 VMs on **VMware (RHEL 9.6)**:
 - **Master Node** → Kubernetes master  
 - **Worker1 & Worker2** → Kubernetes workers  
 
-📸 *VM creation screenshots*
-
+<img width="177" height="111" alt="Capture d’écran 2025-09-16 195153" src="https://github.com/user-attachments/assets/0066ed13-b797-4996-9bed-5987deb13b32" />
 ---
 
 ### 2️⃣ Jenkins Infrastructure (Azure) with Terraform + Vault
@@ -87,9 +86,14 @@ SSH keys were generated on the **DevOps VM (local)** to enable secure connection
 
 📸 *Terraform plan & apply screenshots*  
 📸 *Vault secrets screenshots*
+<img width="1555" height="742" alt="plantf" src="https://github.com/user-attachments/assets/30fd7b01-158f-49fb-a56e-64cb4465eadc" />
 
+<img width="452" height="248" alt="plantf1" src="https://github.com/user-attachments/assets/71240c20-8cc6-4034-8445-c2db4cb36f39" />
+
+<img width="1547" height="517" alt="applytf" src="https://github.com/user-attachments/assets/69f99908-6305-437c-8e3b-b43db72c2d18" />
+
+<img width="1532" height="255" alt="applytf1" src="https://github.com/user-attachments/assets/17441d62-cb2d-4d3e-b884-533429faafbc" />
 ---
-
 ### 3️⃣ Secure Connectivity with Tailscale
 
 Configured **Tailscale VPN** across all local and Azure VMs:  
