@@ -84,15 +84,29 @@ Terraform Files:
 
 SSH keys were generated on the **DevOps VM (local)** to enable secure connections.  
 
-📸 *Terraform plan & apply screenshots*  
-📸 *Vault secrets screenshots*
+
+
+Terraform plan : 
+
 <img width="1555" height="742" alt="plantf" src="https://github.com/user-attachments/assets/30fd7b01-158f-49fb-a56e-64cb4465eadc" />
 
 <img width="452" height="248" alt="plantf1" src="https://github.com/user-attachments/assets/71240c20-8cc6-4034-8445-c2db4cb36f39" />
 
+Terraform apply : 
+
 <img width="1547" height="517" alt="applytf" src="https://github.com/user-attachments/assets/69f99908-6305-437c-8e3b-b43db72c2d18" />
 
 <img width="1532" height="255" alt="applytf1" src="https://github.com/user-attachments/assets/17441d62-cb2d-4d3e-b884-533429faafbc" />
+
+Vault :
+
+<img width="1366" height="535" alt="Design sans titre" src="https://github.com/user-attachments/assets/31af3235-0d8f-4df3-ab0b-da2869797a6e" />
+
+Vault web interface :
+
+
+<img width="1505" height="728" alt="resultatVAULT" src="https://github.com/user-attachments/assets/d6335d00-6b78-48a7-842c-25616c44fbcb" />
+
 ---
 ### 3️⃣ Secure Connectivity with Tailscale
 
