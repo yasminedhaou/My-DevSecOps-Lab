@@ -122,7 +122,7 @@ Configured **Tailscale VPN** across all local and Azure VMs:
 - Simplifies Ansible inventory using Tailscale IPs  
 - Enables secure cross-environment monitoring  
 
-<img width="1494" height="872" alt="tailscale" src="https://github.com/user-attachments/assets/8b510a55-db06-48f2-a613-a77a11ce5b66" />
+<img width="912" height="535" alt="Design sans titre (1)" src="https://github.com/user-attachments/assets/6c50c4d9-add6-4721-b941-724b7434d1f8" />
 
 
 ---
@@ -140,14 +140,19 @@ Ansible Roles:
 - `monitoring` → Deploy Prometheus + Grafana + Node Exporter  
 - `argoCd` → Deploy ArgoCD into Kubernetes  
 - `jenkins` → Configure Jenkins on Azure VMs  
+<img width="475" height="231" alt="roleAnsible" src="https://github.com/user-attachments/assets/4ce80c26-6051-4672-ad1d-31fb636ee110" />
+
 
 Execution:
 ```bash
 ansible-playbook -i inventory.yml playbook.yml
+
+
+
 ```
 
-📸 *Ansible run output screenshots*
-
+<img width="817" height="677" alt="1" src="https://github.com/user-attachments/assets/da54edf9-34ec-47df-8655-0efd0aba52fa" />
+<img width="950" height="143" alt="2" src="https://github.com/user-attachments/assets/5578865e-3bca-4fe9-be94-1e09ed994836" />
 ---
 
 ### 5️⃣ Monitoring with Prometheus & Grafana
@@ -156,8 +161,29 @@ ansible-playbook -i inventory.yml playbook.yml
 - **Node Exporter** → system metrics from Azure VMs  
 - **Grafana** → dashboards and visualization  
 
-📸 *Grafana dashboards screenshots*  
-📸 *Prometheus targets screenshots*
+Prometheus :
+
+<img width="1713" height="871" alt="prom" src="https://github.com/user-attachments/assets/bc1b2bae-8150-4ff5-8ca2-a05b6c3d6697" />
+
+Grafana :
+
+Master :
+
+<img width="1133" height="535" alt="Design sans titre (2)" src="https://github.com/user-attachments/assets/95ab1ba9-21a2-4708-a5c8-8ceb08ca6664" />
+
+Worker 1 :
+
+<img width="1149" height="535" alt="Design sans titre (3)" src="https://github.com/user-attachments/assets/f8be55d7-1bd8-4bff-bac3-edf1697a3ae6" />
+
+Worker 2 :
+
+<img width="1366" height="535" alt="Design sans titre (4)" src="https://github.com/user-attachments/assets/75fbf3b5-037f-4bb6-a301-c47cd13a642f" />
+
+Jenkins VMs On Azure :
+
+<img width="1717" height="841" alt="jenkinsAZ" src="https://github.com/user-attachments/assets/b0f47481-a6ab-47a5-8681-2b740233d094" />
+
+
 
 ---
 
@@ -168,6 +194,9 @@ Pipeline executed on the **Jenkins Slave** in Azure.
 Pipeline stages (`Jenkinsfile`):
 
 1. **Clone repo from GitHub** 📁  
+
+<img width="729" height="913" alt="image" src="https://github.com/user-attachments/assets/ed7e6cfc-9477-4e8c-b4d0-40ccbddf0b61" />
+
 
 2. **Scan code with SonarQube** 🔍  
    📸 *SonarQube analysis screenshots*  
@@ -184,7 +213,8 @@ Pipeline stages (`Jenkinsfile`):
    📸 *dep.yml commit update screenshot*  
 
 7. **Pipeline Success** ✅  
-   📸 *Pipeline all-green screenshot*
+ <img width="1715" height="913" alt="pipelineCI" src="https://github.com/user-attachments/assets/f7a5d235-1cab-40ff-9cfa-b3447b79adea" />
+
 
 ---
 
