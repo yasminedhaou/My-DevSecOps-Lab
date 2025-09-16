@@ -34,7 +34,7 @@ A full-stack **DevSecOps implementation** showcasing how to build, secure, deplo
 
 ## 📁 Project Structure
 ```
-PrimeVideo-DevSecOps
+DevSecOps – Amazon Prime Clone
 ├── ansible
 │   ├── inventory.yml
 │   ├── playbook.yml
