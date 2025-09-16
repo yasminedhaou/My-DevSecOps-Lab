@@ -72,6 +72,8 @@ Created 4 VMs on **VMware (RHEL 9.6)**:
 
 Provisioned **Jenkins Master and Slave VMs** on Azure using Terraform, secured via Vault.
 
+
+
 Terraform Files:
 - `main.tf` → Azure resources (RG, VNet, Subnet, NSG, VMs)  
 - `variables.tf` → Configurable variables  
@@ -105,9 +107,14 @@ Vault :
 Vault web interface :
 
 
-<img width="1505" height="728" alt="resultatVAULT" src="https://github.com/user-attachments/assets/d6335d00-6b78-48a7-842c-25616c44fbcb" />
+<img width="1103" height="535" alt="Design sans titre" src="https://github.com/user-attachments/assets/c01e11c9-2a05-4350-97b5-92e49fbf7d8f" />
 
----
+Azure :
+<img width="1863" height="781" alt="ressources" src="https://github.com/user-attachments/assets/eac3d83a-9a9c-431a-ac07-15df6fecc3c6" />
+
+<img width="1477" height="785" alt="rgAZURE" src="https://github.com/user-attachments/assets/57213fc5-1c3e-4a8a-9d01-b0451d3aef38" />
+
+
 ### 3️⃣ Secure Connectivity with Tailscale
 
 Configured **Tailscale VPN** across all local and Azure VMs:  
@@ -115,7 +122,8 @@ Configured **Tailscale VPN** across all local and Azure VMs:
 - Simplifies Ansible inventory using Tailscale IPs  
 - Enables secure cross-environment monitoring  
 
-📸 *Tailscale dashboard screenshots*
+<img width="1494" height="872" alt="tailscale" src="https://github.com/user-attachments/assets/8b510a55-db06-48f2-a613-a77a11ce5b66" />
+
 
 ---
 
