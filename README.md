@@ -50,7 +50,7 @@ DevSecOps – Amazon Prime Clone
 │   └── provider.tf
 ├── Jenkinsfile
 ├── argocd
-│   └── dep.yml
+│   └── deploymentAmazoneP.yml
 └── README.md
 ```
 
@@ -66,7 +66,7 @@ Created 4 VMs on **VMware (RHEL 9.6)**:
 - **Worker1 & Worker2** → Kubernetes workers  
 
 <img width="177" height="111" alt="Capture d’écran 2025-09-16 195153" src="https://github.com/user-attachments/assets/0066ed13-b797-4996-9bed-5987deb13b32" />
----
+
 
 ### 2️⃣ Jenkins Infrastructure (Azure) with Terraform + Vault
 
@@ -177,7 +177,7 @@ Worker 1 :
 
 Worker 2 :
 
-<img width="1366" height="535" alt="Design sans titre (4)" src="https://github.com/user-attachments/assets/75fbf3b5-037f-4bb6-a301-c47cd13a642f" />
+<img width="1140" height="535" alt="Design sans titre (4)" src="https://github.com/user-attachments/assets/621914eb-2ef3-40e4-813d-4ae112a52072" />
 
 Jenkins VMs On Azure :
 
@@ -199,20 +199,26 @@ Pipeline stages (`Jenkinsfile`):
 
 
 2. **Scan code with SonarQube** 🔍  
-   📸 *SonarQube analysis screenshots*  
 
-3. **Build Docker image (TMDB API key via Vault)** 🐋  
+   <img width="855" height="871" alt="image" src="https://github.com/user-attachments/assets/16b811dc-ba41-4b04-9d60-5da530bbc9c5" />
+<img width="1723" height="502" alt="scan" src="https://github.com/user-attachments/assets/2b5cba58-c1c2-4dee-8eae-957f8377e912" />
 
-4. **Scan Docker image with Trivy** 🛡️  
-   📸 *Trivy scan results screenshot*  
 
-5. **Push Docker image to GitLab Registry** 📦  
-   📸 *Push success screenshot*  
+4. **Build Docker image (TMDB API key via Vault)** 🐋  
+<img width="992" height="871" alt="image" src="https://github.com/user-attachments/assets/d0bb4771-4b92-4dd6-a46a-9a700cf3b97e" />
 
-6. **Update `dep.yml` for ArgoCD auto-sync** ✏️  
-   📸 *dep.yml commit update screenshot*  
+5. **Scan Docker image with Trivy** 🛡️  
+<img width="1122" height="871" alt="image" src="https://github.com/user-attachments/assets/525db744-c336-43e0-b67c-10d84b05f937" />
+<img width="1352" height="645" alt="trivyCLOI" src="https://github.com/user-attachments/assets/ce7f89e5-b305-4187-9edf-b027e9b67f7a" />
 
-7. **Pipeline Success** ✅  
+6. **Push Docker image to GitLab Registry** 📦  
+  <img width="1253" height="871" alt="image" src="https://github.com/user-attachments/assets/45317ada-8f4d-4247-afbb-c5fcfa385856" />
+
+
+7. **Update `deploymentAmazonP.yml` for ArgoCD auto-sync** ✏️  
+<img width="1387" height="871" alt="image" src="https://github.com/user-attachments/assets/b2745909-dbe6-4a6c-bf6f-f968235a69b7" />
+
+8. **Pipeline Success** ✅  
  <img width="1715" height="913" alt="pipelineCI" src="https://github.com/user-attachments/assets/f7a5d235-1cab-40ff-9cfa-b3447b79adea" />
 
 
@@ -222,14 +228,15 @@ Pipeline stages (`Jenkinsfile`):
 
 - ArgoCD installed via Ansible  
 - Auto-sync configured with GitHub repository  
-- Commits on `dep.yml` trigger automatic redeployment  
+- Commits on `deploymentAmazonP.yml` trigger automatic redeployment  
 - Exposed externally using:  
   - **MetalLB** → External IP  
   - **NGINX Ingress** → Domain-based access  
 
-📸 *ArgoCD auto-sync dashboard*  
-📸 *MetalLB external IP*  
-📸 *Ingress resources screenshots*
+<img width="1713" height="872" alt="appHealth" src="https://github.com/user-attachments/assets/d8f21f25-5d40-4786-8062-f5470667e8fd" />
+
+<img width="962" height="110" alt="svc" src="https://github.com/user-attachments/assets/96569e54-2653-4f03-a169-715163559b73" />
+
 
 ---
 
@@ -238,7 +245,7 @@ Pipeline stages (`Jenkinsfile`):
 Amazon Prime Video Clone accessible at:  
 🌐 **www.primevideo-yasmine.com**
 
-📸 *Final screenshot of the site*
+<img width="1722" height="858" alt="amazoneprime" src="https://github.com/user-attachments/assets/422f5abf-1fa7-42d6-982a-ee606e0ae0ad" />
 
 ---
 
