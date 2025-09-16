@@ -163,7 +163,7 @@ ansible-playbook -i inventory.yml playbook.yml
 
 Prometheus :
 
-<img width="1713" height="871" alt="prom" src="https://github.com/user-attachments/assets/bc1b2bae-8150-4ff5-8ca2-a05b6c3d6697" />
+<img width="1048" height="535" alt="Design sans titre (5)" src="https://github.com/user-attachments/assets/091711d5-bcdf-4fb4-98d1-f491f3a7b0cf" />
 
 Grafana :
 
@@ -245,7 +245,7 @@ Pipeline stages (`Jenkinsfile`):
 ## 🎯 Final Result
 
 Amazon Prime Video Clone accessible at:  
-🌐 **www.primevideo-yasmine.com**
+🌐 **www.amazoneprime.com**
 
 <img width="1722" height="858" alt="amazoneprime" src="https://github.com/user-attachments/assets/422f5abf-1fa7-42d6-982a-ee606e0ae0ad" />
 
