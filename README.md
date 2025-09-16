@@ -214,6 +214,8 @@ Pipeline stages (`Jenkinsfile`):
 6. **Push Docker image to GitLab Registry** 📦  
   <img width="1253" height="871" alt="image" src="https://github.com/user-attachments/assets/45317ada-8f4d-4247-afbb-c5fcfa385856" />
 
+<img width="1870" height="877" alt="image" src="https://github.com/user-attachments/assets/49c4fa5f-1052-48ce-afce-4b343b4dd299" />
+
 
 7. **Update `deploymentAmazonP.yml` for ArgoCD auto-sync** ✏️  
 <img width="1387" height="871" alt="image" src="https://github.com/user-attachments/assets/b2745909-dbe6-4a6c-bf6f-f968235a69b7" />
